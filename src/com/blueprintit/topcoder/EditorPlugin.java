@@ -24,7 +24,7 @@ public abstract class EditorPlugin
 		
 	public void setTextEnabled(Boolean enable)
 	{
-		setTextEnabled(enable);
+		setTextEnabled(enable.booleanValue());
 	}
 		
 	protected void setTextEnabled(boolean enable)
