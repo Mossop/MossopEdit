@@ -100,6 +100,15 @@ public class RemotePlugin extends AbstractEditorPlugin
 			{
 				Socket connection = new Socket("localhost",6767);
 				stream = new PluginDataStream(connection.getInputStream(),connection.getOutputStream());
+				stream.writeInt(1);
+				int version = stream.readInt();
+				if (version!=1)
+				{
+					log("Remote plugin listener is an invalid version. Please update your applet plugin");
+					return;
+				}
+				String ident = stream.readString();
+				log("Connected to remote plugin: "+ident);
 			}
 			stream.writeObject(Command.START_USING);
 		}
@@ -123,6 +132,18 @@ public class RemotePlugin extends AbstractEditorPlugin
 
 	public void setProblemComponent(ProblemComponentModel component, Language language, Renderer renderer)
 	{
+		log("getComponentTypeID: "+component.getComponentTypeID());
+		log("getID: "+component.getID());
+		log("getPoints: "+component.getPoints());
+		log("problem.getProblemID: "+component.getProblem().getProblemID());
+		log("problem.getProblemType: "+component.getProblem().getProblemType());
+		log("round.getContestName: "+component.getProblem().getRound().getContestName());
+		log("round.getRoundName: "+component.getProblem().getRound().getRoundName());
+		log("round.getRoundID: "+component.getProblem().getRound().getRoundID());
+		log("round.getRoundType: "+component.getProblem().getRound().getRoundType());
+		log("problem.getProblem().getName()"+component.getProblem().getProblem().getName());
+		log("problem.getProblem().getProblemId()"+component.getProblem().getProblem().getProblemId());
+		log("problem.getProblem().getProblemTypeID()"+component.getProblem().getProblem().getProblemTypeID());
 		try
 		{
 			stream.writeObject(Command.SET_PROBLEM);

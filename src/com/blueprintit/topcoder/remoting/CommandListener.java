@@ -18,10 +18,12 @@ import com.topcoder.shared.language.Language;
 public class CommandListener implements Runnable
 {
 	private RemotelyCalledPlugin plugin;
+	private String info;
 	
-	public CommandListener(RemotelyCalledPlugin plugin)
+	public CommandListener(RemotelyCalledPlugin plugin, String ident)
 	{
 		this.plugin=plugin;
+		info=ident;
 		(new Thread(this)).start();
 	}
 	
@@ -81,6 +83,15 @@ public class CommandListener implements Runnable
 			{
 				applet = listener.accept();
 				stream = new PluginDataStream(applet.getInputStream(),applet.getOutputStream());
+				int version=stream.readInt();
+				if (version!=1)
+				{
+					System.out.println("Invalid applet plugin version detected");
+					applet.close();
+					break;
+				}
+				stream.writeInt(1);
+				stream.writeString(info);
 				System.out.println("Topcoder connected");
 			}
 			catch (IOException e)
@@ -129,12 +140,19 @@ public class CommandListener implements Runnable
 			try
 			{
 				applet.close();
-				listener.close();
 			}
 			catch (IOException e)
 			{
 				e.printStackTrace();
 			}
+		}
+		try
+		{
+			listener.close();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
 		}
 	}
 }

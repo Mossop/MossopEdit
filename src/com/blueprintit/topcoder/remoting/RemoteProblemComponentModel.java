@@ -48,7 +48,7 @@ public class RemoteProblemComponentModel implements ProblemComponentModel, Custo
 
 	public ProblemModel getProblem()
 	{
-		// TODO sort this out
+		// TODO Don't think that this needs fixing
 		return null;
 	}
 
@@ -64,8 +64,8 @@ public class RemoteProblemComponentModel implements ProblemComponentModel, Custo
 
 	public boolean hasSignature()
 	{
-		// TODO Auto-generated method stub
-		return false;
+		// TODO Not sure what this is supposed to mean
+		return true;
 	}
 
 	public String getClassName()

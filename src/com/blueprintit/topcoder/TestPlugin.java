@@ -20,7 +20,7 @@ public class TestPlugin implements RemotelyCalledPlugin
 {
 	public TestPlugin()
 	{
-		new CommandListener(this);
+		new CommandListener(this,"TestPlugin");
 	}
 	
 	public String getSource()
