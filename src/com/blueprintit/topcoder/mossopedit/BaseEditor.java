@@ -15,7 +15,7 @@ import java.awt.event.*;
 import java.awt.*;
 import java.io.IOException;
 
-public abstract class BaseEditor extends EditorPlugin
+public abstract class BaseEditor extends AbstractEditorPlugin
 {
 	protected Map variables = new HashMap();
 	protected ProblemComponentModel problem;

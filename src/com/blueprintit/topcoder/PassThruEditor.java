@@ -7,7 +7,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 import javax.swing.JPanel;
 
-public class PassThruEditor extends EditorPlugin
+public class PassThruEditor extends AbstractEditorPlugin
 {
 	private Object plugin;
 	
@@ -16,15 +16,15 @@ public class PassThruEditor extends EditorPlugin
 		plugin=target;
 	}
 	
-	public static EditorPlugin getPlugin(String classname)
+	public static AbstractEditorPlugin getPlugin(String classname)
 	{
 		try
 		{
 			Class pluginclass = Class.forName(classname);
 			Object plugin = pluginclass.newInstance();
-			if (plugin instanceof EditorPlugin)
+			if (plugin instanceof AbstractEditorPlugin)
 			{
-				return (EditorPlugin)plugin;
+				return (AbstractEditorPlugin)plugin;
 			}
 			Method check = pluginclass.getMethod("getEditorPanel",null);
 			if (!check.getReturnType().equals(JPanel.class))
